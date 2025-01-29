@@ -1,8 +1,11 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +20,12 @@ public class User implements Serializable {//objetos que possam ser transformado
     private String phone;
     private String password;
 
+    @JsonIgnore //para evitar os ciclos infinitos de referencias entre objetos relacionados
+    @OneToMany(mappedBy = "client") //nome do atributo do outro lado da associação
+    private List<Order> orders = new ArrayList<>();
+
+
+
     public User() {
     }
 
@@ -27,6 +36,7 @@ public class User implements Serializable {//objetos que possam ser transformado
         this.phone = phone;
         this.password = password;
     }
+
 
     public Long getId() {
         return id;
@@ -79,5 +89,9 @@ public class User implements Serializable {//objetos que possam ser transformado
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
