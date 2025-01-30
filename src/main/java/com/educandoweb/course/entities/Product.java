@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +20,9 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    //apartir dessa coleção categories vai ser gerado a nova tabela
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id "), inverseJoinColumns = @JoinColumn(name = "category_id")) // é basicamente um innerjoin para criar uma tabela associativa
     private Set<Category> categories = new HashSet<>();
 
     public Product() {

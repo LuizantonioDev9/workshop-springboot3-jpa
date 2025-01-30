@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,7 +17,11 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
+    @JsonIgnore //o jackson fica criando o loop infinito
+    //não vai gerar outra tabela pois ja temos uma tabela chamada categories
+    //o spring entende que pelo mappedBy o products não vai gerar uma nova tabela
+    //por que nós ja temos uma tabela predefinida para ser criada que está lá em product
+    @ManyToMany(mappedBy = "categories") //mappedby é usado no lado inverso da conexão ou seja na outra tabela
     private Set<Product> products = new HashSet<>();
 
     public Category() {
