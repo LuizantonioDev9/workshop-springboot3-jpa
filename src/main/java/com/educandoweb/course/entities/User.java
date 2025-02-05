@@ -24,8 +24,6 @@ public class User implements Serializable {//objetos que possam ser transformado
     @OneToMany(mappedBy = "client") //nome do atributo do outro lado da associação
     private List<Order> orders = new ArrayList<>();
 
-
-
     public User() {
     }
 

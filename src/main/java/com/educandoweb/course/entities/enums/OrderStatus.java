@@ -11,7 +11,7 @@ public enum OrderStatus {
 
     private int code;
 
-    private OrderStatus(int code) {
+    OrderStatus(int code) {
         this.code = code;
     }
 
