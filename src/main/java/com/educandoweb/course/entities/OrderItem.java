@@ -38,6 +38,7 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
     }
 
+
     public Product getProduct() {
         return id.getProduct();
     }
@@ -60,6 +61,14 @@ public class OrderItem implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override

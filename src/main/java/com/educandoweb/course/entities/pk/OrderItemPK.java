@@ -12,7 +12,7 @@ import java.util.Objects;
 @Embeddable //
 public class OrderItemPK implements Serializable {
 
-    @ManyToOne
+    @ManyToOne //associação com a classe order
     @JoinColumn(name = "order_id") // nome da coluna
     private Order order;
 

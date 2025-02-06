@@ -26,7 +26,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "client") //chave estrangeira que vai ta no banco de dados
     private User client; // por padrão o jpa vai aninhar o order com o client no request do postman
 
-    @OneToMany(mappedBy = "id.order")
+    @OneToMany(mappedBy = "id.order") //associação inversa
     Set<OrderItem> items = new HashSet<>();
 
     public Order() {
@@ -38,7 +38,6 @@ public class Order implements Serializable {
         this.client = client;
         setOrderStatus(orderStatus);
     }
-
 
     public Set<OrderItem> getItems() {
         return items;

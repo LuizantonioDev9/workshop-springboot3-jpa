@@ -25,6 +25,10 @@ public class Product implements Serializable {
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id "), inverseJoinColumns = @JoinColumn(name = "category_id")) // é basicamente um innerjoin para criar uma tabela associativa
     private Set<Category> categories = new HashSet<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Product() {
     }
 
@@ -34,6 +38,12 @@ public class Product implements Serializable {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+
+
+    public Set<OrderItem> getitems() {
+        return items;
     }
 
     public Set<Category> getCategories() {
@@ -78,6 +88,15 @@ public class Product implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for(OrderItem x: items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
