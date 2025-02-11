@@ -22,4 +22,8 @@ public class UserService {
         Optional<User> obj = repository.findById(id); //o optinal evitar o obj de retorna null, caso não ache nada ele retorna o vazio
         return obj.get();//o get vai retorna o objeto do tipo user que estiver dentro do meu optional
     }
+
+    public User insert(User obj) {
+        return repository.save(obj);
+    }
 }
